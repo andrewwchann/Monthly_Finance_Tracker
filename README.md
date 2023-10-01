@@ -10,6 +10,11 @@
 <p>3. Open the project in Android Studio and sync your graddle files</p>
 <p>4. Install a emulator at the most recent update and run the project</p>
 
+## User Instructions
+<p>Add button at the bottom will add expenses to the screen</p>
+<p>To edit a expense, simply tap the expense you want to edit then change needed parameters</p>
+<p>To delete a expense, simply long hold a expense and a the expense will be deleted then a small confirmation will show</p>
+
 
 
 
