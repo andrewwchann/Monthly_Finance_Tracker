@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textview_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textview_expense_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name of expense"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_date"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textview_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:hint="Cost"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_expense_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_expense_name"
+        app:layout_constraintTop_toTopOf="@+id/textview_expense_name"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textview_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Comment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_expense_name"
+        android:textSize="20dp"/>
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_comment"
+        android:textSize="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
