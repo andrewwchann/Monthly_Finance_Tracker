@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements AddExpenseFragment.onAddExpenseInteractionListener {
 
+    // initializing variables
     ListView expenseListView;
     ArrayAdapter<Data> expenseAdapter;
     ArrayList<Data> dataList;
@@ -29,6 +30,15 @@ public class MainActivity extends AppCompatActivity implements AddExpenseFragmen
 //    int currentYear = calendar.get(Calendar.YEAR);
 //    int currentMonth = calendar.get(Calendar.MONTH);
 
+
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously
+     *                           being shut down, this Bundle contains the data it most
+     *                           recently supplied in onSaveInstanceState(Bundle).
+     *                           Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,38 +49,42 @@ public class MainActivity extends AppCompatActivity implements AddExpenseFragmen
 
         subTotalTextView = findViewById(R.id.subtotal_textview);
 
+        // calling method to delete expenses
         setUpListViewListener();
 
+        // creating the string arrays to hold data of each expense object
         String[] dates = {};
         String[] expenseNames = {};
         String[] expenseCosts = {};
         String[] comments = {};
 
+        // instantiating a new array list
         dataList = new ArrayList<>();
 
-
-
+        // iterates through the dates length and adds the data object from each string array to the data list
         for (int i=0; i<dates.length; i++) {
             dataList.add(new Data(dates[i], expenseNames[i], expenseCosts[i], comments[i]));
-
         }
 
-
-
+        // creating a new custom list object
         expenseAdapter = new CustomList(this , dataList);
         expenseListView.setAdapter(expenseAdapter);
 
+        // defining the functionality of the add button
+        // sends a null object to AddExpenseFragnment indicating a new expense object will be added
         final Button addCityButton = findViewById(R.id.add_expense_button);
         addCityButton.setOnClickListener((v -> {
             new AddExpenseFragment(null).show(getSupportFragmentManager(), "ADD EXPENSE");
         }));
 
+        // defining when we click on a item in the list view
         expenseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // on click will get the data position
                 Data selectedExpense = dataList.get(position);
 
-                // Create an instance of AddExpenseFragment with the selected expense object for editing
+                // Creating a instance of AddExpenseFragment with the selected expense object for editing
                 AddExpenseFragment editExpenseFragment = new AddExpenseFragment(selectedExpense);
 
                 // Show the fragment for editing
@@ -78,21 +92,28 @@ public class MainActivity extends AppCompatActivity implements AddExpenseFragmen
             }
         });
 
-//        for (int i=0; i<dates.length; i++) {
-//            dataList.add(new Data(dates[i], expenseNames[i], expenseCosts[i], comments[i]));
-//        }
-
     }
 
+    /**
+     * Called when a user does a long click on a expense element.
+     *
+     * Will delete the expense object where the user long clicks.
+     */
     private void setUpListViewListener() {
         expenseListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Context context = getApplicationContext();
+                // toast notification saying the expense was removed
                 Toast.makeText(context, "Expense Removed", Toast.LENGTH_LONG).show();
 
+                // removing at the index of the selected object
                 dataList.remove(i);
+
+                // notifying the data has changed to the expense adapter
                 expenseAdapter.notifyDataSetChanged();
+
+                // recalculating the subtotal
                 calculateSubtotal(dataList);
                 return true;
             }
@@ -101,34 +122,26 @@ public class MainActivity extends AppCompatActivity implements AddExpenseFragmen
 
     }
 
-//    private void totalCosts(String[] costs) {
-//        float subTotal = 0;
-//        for (int i=0; i<costs.length; i++) {
-//            subTotal += Float.parseFloat(costs[i]);
-//            Log.d("money", Float.toString(subTotal));
-//        }
-//        String total = Float.toString(subTotal);
-//        ((TextView)findViewById(R.id.subtotal_textview)).setText(String.format("$%s", total));
-//    }
-
+    /**
+     * Called when a new expense is added or deleted to calculate the subtotal of expenses
+     *
+     * @param dataList is the list of data that we want to take the total of.
+     * */
     public void calculateSubtotal(ArrayList<Data> dataList) {
         float total = 0;
+        // iterating throug the data objects
         for (Data data : dataList) {
+            // getting the expense cost of each object in the list
             String check = data.getExpenseCost();
+            // if its empty we continue
             if (check == "") {
                 continue;
             }
+            // else when there is an expense we convert to float and add to total
             else {
                 float expense = Float.parseFloat(data.getExpenseCost());
                 total += expense;
             }
-//            String date = data.getDate();
-//            int inputYear = Integer.parseInt(date.substring(0,4));
-//            int inputMonth = Integer.parseInt(date.substring(5));
-
-//            if (inputYear == currentYear && inputMonth == currentMonth){
-//
-//            }
         }
 
         String formatTotal = String.format("$%.2f", total);
@@ -136,14 +149,22 @@ public class MainActivity extends AppCompatActivity implements AddExpenseFragmen
         ((TextView)subTotalTextView).setText(formatTotal);
     }
 
+    /**
+     * Called when the submit button is clicked in the dialog pop up
+     *
+     * @param newData the data that is submitted. This can either be edited or new data
+     * @param isEdited the string used to check if the data was edited or not*/
     @Override
     public void onSubmitPress(Data newData, String isEdited) {
+        // if edited we notify the update data to the array adapter
         if (isEdited == "edited") {
             expenseAdapter.notifyDataSetChanged();
         }
+        // else we add the new data
         else {
             expenseAdapter.add(newData);
         }
+        // recalculate the total
         calculateSubtotal(dataList);
     }
 }

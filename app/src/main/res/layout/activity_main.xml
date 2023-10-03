@@ -14,8 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.555" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 <!--    <Button-->
 <!--        android:id="@+id/delete_expense_btn"-->
@@ -35,7 +34,9 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="646dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="19dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/add_expense_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

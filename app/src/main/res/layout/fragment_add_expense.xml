@@ -35,10 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
+
+        android:inputType="numberDecimal"
         android:hint="Expense Cost"
         android:height="48dp"
-        android:textSize="25dp"/>
+        android:textSize="25dp" />
 
     <EditText
         android:id="@+id/editComment"
