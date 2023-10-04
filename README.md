@@ -1,4 +1,4 @@
-## <h1 align="center"> Monthly Finance Tracker <h1>
+## <h1 align="center"> Monthly Finance Tracker App<h1>
 
 
 ## About
