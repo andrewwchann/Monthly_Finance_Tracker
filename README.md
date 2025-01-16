@@ -1,8 +1,8 @@
-## <h1 align="center"> Monthly Finance Tracker App<h1>
+## Inventory Management App
 
 
 ## About
-<p>This group project aimed to create an easy-to-use app for tracking monthly finances, developed using Android Studio and Java.</p>
+<p>This group project aimed to create an easy-to-use app for managing personal belonging or inventory for insurance purposes. Developed using Android Studio and Java.</p>
 
 ## Running Instructions
 <p>1. Download Android Studio if you don't already have it installed.</p>
